@@ -13,6 +13,7 @@ import {
 import { useEffect, useState } from "react";
 import { addToCart, getAllProducts, getProductsByCategory } from "../../API";
 import { useParams } from "react-router-dom";
+import AppHeader from "../Header";
 
 function Products() {
   const [loading, setLoading] = useState(false);
@@ -141,23 +142,31 @@ function Products() {
 
 function AddToCartButton({ item }) {
   const [loading, setLoading] = useState(false);
+  const [itemdata, setitemdata] = useState('');
+  
   const addProductToCart = () => {
     setLoading(true);
-    addToCart(item.id).then((res) => {
-      message.success(`${item.title} has been added to cart!`);
-      setLoading(false);
-    });
+    setitemdata(item.id)
+    // addToCart(item.id).then((res) => {
+    //   message.success(`${item.title} has been added to cart!`);
+    //   setLoading(false);
+    // });
   };
   return (
+    <>
     <Button
       type="link"
       onClick={() => {
         addProductToCart();
       }}
       loading={loading}
-    >
+      >
       Add to Cart
     </Button>
+    {/* <AppHeader data={itemdata} /> */}
+
+      </>
+
   );
 }
 export default Products;
